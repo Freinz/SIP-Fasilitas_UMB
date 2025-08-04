@@ -14,17 +14,23 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::get('/', function () {
+    // Redirect to dashboard if authenticated, else show login or landing page
+    if (auth()->check()) {
+        return view('dashboard');
+    }
+    return view('index');
+});
 
 Auth::routes();
 
 
 // Define a group of routes with 'auth' middleware applied
 Route::middleware(['auth'])->group(function () {
-    // Define a GET route for the root URL ('/')
-    Route::get('/', function () {
-        // Return a view named 'index' when accessing the root URL
-        return view('index');
-    });
+    // Redirect /dashboard to dashboard view
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     // Define a GET route with dynamic placeholders for route parameters
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);

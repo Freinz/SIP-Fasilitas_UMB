@@ -38,7 +38,6 @@
     @endif
     @yield('content')
     @if (!View::hasSection('auth-v2'))
-        @include('layouts.authFooter')
     @endif
     </div>
     </div>
@@ -47,7 +46,6 @@
     @endif
     @include('layouts.customizer')
 
-    @include('layouts.footerjs')
 
     @yield('scripts')
 </body>

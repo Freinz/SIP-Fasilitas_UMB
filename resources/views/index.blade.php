@@ -1,1528 +1,882 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <title>Light Able Admin & Dashboard Template | Phoenixcoded</title>
-    <!-- [Meta] -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description"
-    content="Light Able admin and dashboard template offer a variety of UI elements and pages, ensuring your admin panel is both fast and effective.">
-  <meta name="author" content="phoenixcoded">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP-Fasilitas UMB | Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ URL::asset('build/images/favicon.svg') }}" type="image/x-icon" />
-    <!-- [Page specific CSS] start -->
-    <link href="{{ URL::asset('build/css/plugins/animate.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ URL::asset('build/css/plugins/swiper-bundle.css') }}" rel="stylesheet">
-    <!-- [Page specific CSS] end -->
-    <!-- [Google Font : Public Sans] icon -->
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-    <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="{{ URL::asset('build/fonts/tabler-icons.min.css') }}">
-    <!-- [Feather Icons] https://feathericons.com -->
-    <link rel="stylesheet" href="{{ URL::asset('build/fonts/feather.css') }}">
-    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-    <link rel="stylesheet" href="{{ URL::asset('build/fonts/fontawesome.css') }}">
-    <!-- [Material Icons] https://fonts.google.com/icons -->
-    <link rel="stylesheet" href="{{ URL::asset('build/fonts/material.css') }}">
-    <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="{{ URL::asset('build/css/style.css') }}" id="main-style-link">
-    <link rel="stylesheet" href="{{ URL::asset('build/css/style-preset.css') }}">
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
 
-    <link rel="stylesheet" href="{{ URL::asset('build/css/landing.css') }}">
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Statistics Section */
+        .stats {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #ecf0f1;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            text-align: center;
+            color: #bdc3c7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
-<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light"
-    class="landing-page">
-    <!-- [ Main Content ] start -->
-    <!-- [ Pre-loader ] start -->
-    <div class="loader-bg">
-        <div class="loader-track">
-            <div class="loader-fill"></div>
-        </div>
-    </div>
-    <!-- [ Pre-loader ] End -->
-
-    <!-- [ Header ] start -->
-    <header id="home">
-        <!-- [ Nav ] start -->
-        @include('layouts.component-header')
-        <!-- [ Nav ] end -->
-
-        <!-- [ Home ] start -->
-        <div class="container-fluid">
-            <div class="bg-dark mx-sm-3 home-section">
-                <img src="{{ URL::asset('build/images/landing/img-header-bg.svg') }}" alt="background shape"
-                    class="img-fluid img-header-bg">
-                <div class="swiper language-slides-hero">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="row align-items-center justify-content-center text-center">
-                                <div class="col-sm-12 header-content">
-                                    <span class="header-badge text-white">
-                                        <i class="ph-duotone ph-medal text-warning me-2"></i>
-                                        Unlock Your Potential for Just $11. Limited Offer
-                                    </span>
-                                    <div class="row justify-content-center text-center">
-                                        <div class="col-xl-7 col-lg-8 col-md-9 col-sm-10 col-11">
-                                            <h1 class="my-3 wow animate__fadeInUp text-white" data-wow-delay="0.4s">
-                                                Elevate Your Project with Light Able Admin Dashboard</h1>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center text-center">
-                                        <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-8 col-sm-10 col-11">
-                                            <p class="f-16 mb-3 mb-lg-5 wow animate__fadeInUp" data-wow-delay="0.6s">
-                                                Your go-to solution for crafting sleek admin interfaces effortlessly.
-                                                Streamline your workflow and enhance user experience with ease. </p>
-                                        </div>
-                                    </div>
-                                    <div class="wow animate__fadeInUp" data-wow-delay="0.8s">
-                                        <a href="https://phoenixcoded.com/item/light-able-bootstrap-admin-dashboard/"
-                                            class="btn btn-primary me-3">Live Preview <i
-                                                class="ph-duotone ph-arrow-square-out"></i></a>
-                                        <a href="https://github.com/phoenixcoded/light-able-bootstrap-vanilla-js"
-                                            class="btn btn-outline-light" target="_blank">
-                                            <i class="fab fa-github me-1"></i>
-                                            Github
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="swiper language-slides">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-bs.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Bootstrap
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-react.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            React
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-vue.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Vue.js
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-laravel.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Laravel
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-node.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Node.js
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-django.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Django
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-net.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            ASP
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-cakephp.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            CakePHP
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-mvc5.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            MVC5
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="#" class="language-badge text-white">
-                                            <img src="{{ URL::asset('build/images/landing/techcard-figma.svg') }}"
-                                                class="me-1" alt="react icon">
-                                            Figma
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-university"></i>
                 </div>
+                <div class="logo-text">SIP-Fasilitas UMB</div>
             </div>
-            <!-- [ Home ] end -->
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#how-it-works">Cara Kerja</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <a href="/login" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Masuk Sistem
+            </a>
         </div>
-    </header>
-    <!-- [ Header ] End -->
+    </nav>
 
-    <!-- [ Key features ] start -->
-    <!-- [ platform ] start -->
-    <section class="bg-white">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-element">
+            <i class="fas fa-building" style="font-size: 4rem;"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-tools" style="font-size: 3rem;"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-clipboard-list" style="font-size: 3.5rem;"></i>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">SIP-Fasilitas UMB</h1>
+            <p class="hero-subtitle">Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin</p>
+            <p class="hero-description">
+                Solusi digital terdepan untuk mengelola peminjaman ruangan dan alat di kampus. 
+                Proses yang lebih efisien, transparan, dan mudah untuk seluruh civitas akademika.
+            </p>
+            <div class="cta-buttons">
+                <a href="/login" class="cta-primary">
+                    <i class="fas fa-rocket"></i>
+                    Mulai Peminjaman
+                </a>
+                <a href="#features" class="cta-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Pelajari Lebih Lanjut
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
         <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Technology</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">Light Able is a
-                        dynamic admin dashboard template packed with modern technologies like Bootstrap 5, React JS,
-                        Angular, Vue 3, and more.</p>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.2s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-bs.svg') }}" alt="images" class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Bootstrap</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+            <h2 class="section-title fade-in">Fitur Unggulan</h2>
+            <p class="section-subtitle fade-in">
+                Sistem yang dirancang khusus untuk mempermudah proses peminjaman fasilitas kampus
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.3s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-react.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">React Next</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.4s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-vue.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Vue.js</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.5s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-laravel.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Laravel</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.6s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-node.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Node.js</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.7s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-django.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Django</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.8s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-net.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">ASP</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.9s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-cakephp.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">CakePHP</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.9s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-mvc5.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">MVC5</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="card technology-card wow animate__fadeInRight section-title" data-wow-delay="0.9s">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('build/images/landing/techcard-figma.svg') }}" alt="images"
-                                        class="tech-img">
-                                </div>
-                                <div class="flex-grow-1 mx-2">
-                                    <h5 class="mb-0">Figma</h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <a href="#" class="text-sm link-secondary d-flex align-items-center">Preview
-                                        <i class="ti ti-chevrons-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="feature-title">Booking Real-time</h3>
+                    <p class="feature-description">
+                        Cek ketersediaan ruangan dan alat secara real-time. Tidak ada lagi double booking atau konflik jadwal.
+                    </p>
                 </div>
 
-            </div>
-        </div>
-    </section>
-    <!-- [ platform ] end -->
-    <!-- [ layout-card ] start -->
-    <section class="bg-white pt-0">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Layouts Demos</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">Unveil the
-                        diversity of page layouts within Light Able, including Vertical, Horizontal, and Tab Layouts,
-                        each offering unique design options to suit your preferences and project requirements.</p>
-                </div>
-            </div>
-            <div class="row g-4 text-center ">
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.2s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="/dashboard" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-layouts-vertical.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <!-- SVG icon for workflow -->
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="8" width="32" height="32" rx="8" fill="url(#workflow-gradient)"/>
+                            <path d="M16 24H32M16 24L20 20M16 24L20 28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="workflow-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#667eea"/>
+                                    <stop offset="1" stop-color="#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
                     </div>
-                    <a href="/demo/layout-vertical" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Vertical <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="/demo/layout-horizontal" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-layouts-horizontal.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="/demo/layout-horizontal" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Horizontal <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="/demo/layout-compact" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-layouts-compact.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="/demo/layout-compact" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Compact <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="/demo/layout-2" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-layouts-creative.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="/demo/layout-2" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Creative <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="/demo/layout-tab" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-layouts-tab.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="/demo/layout-tab" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Tab <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- [ layout-card ] end -->
-    
-    <!-- [ Apps-demos ] start -->
-    <section class="bg-white pt-0">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Apps</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">Unveil the
-                        diversity of page layouts within Light Able, including Vertical, Horizontal, and Tab Layouts,
-                        each offering unique design options to suit your preferences and project requirements.</p>
-                </div>
-            </div>
-            <div class="row g-4 text-center ">
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.2s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/invoice-list" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-invoice.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/invoice-list" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Invoice <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/social-media" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-social.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/social-media" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Social <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/mail" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-inbox.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/mail" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Inbox <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/ecom_product" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-ecommerce.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/ecom_product" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">E-commerce <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/gallery-grid" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-gallery.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/gallery-grid" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Gallery <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.8s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/calendar" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-calendar.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/calendar" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Calendar <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/chat" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-app-chat.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/chat" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Chat <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- [ App-demos ] end -->
-    <!-- [ Pages ] start -->
-    <section class="bg-white pt-0">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Important Pages</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">Unveil the
-                        diversity of page layouts within Light Able, including Vertical, Horizontal, and Tab Layouts,
-                        each offering unique design options to suit your preferences and project requirements.</p>
-                </div>
-            </div>
-            <div class="row g-4 text-center ">
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.2s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="elements/bc_alert" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/lay-vertical.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="elements/bc_alert" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Components <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="pages/login-v1" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-auth-page.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="pages/login-v1" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Auth Pages <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="widget/w_statistics" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-widgets.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="widget/w_statistics" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Widgets <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="forms/form2_wizard" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-wizard.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="forms/form2_wizard" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Wizard <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="application/account-profile" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-account-profile.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="application/account-profile" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Account Profile <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.8s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="table/dt_advance" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-data-table.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="table/dt_advance" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Data Tables <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="forms/form_elements" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-form.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="forms/form_elements" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Forms <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.8s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="pages/error-404" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-error.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="pages/error-404" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Error <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="1.0s">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="pages/coming-soon" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-coming-soon.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="pages/coming-soon" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Coming Soon <i
-                            class="ti ti-link text-primary f-22"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6">
-                    <div class="card layout-card">
-                        <div class="card-body">
-                            <a href="pages/contact-us" target="_blank">
-                                <img src="{{ URL::asset('build/images/landing/preview-important-contact.jpg') }}" alt="img"
-                                    class="img-fluid border">
-                            </a>
-                        </div>
-                    </div>
-                    <a href="pages/contact-us" target="_blank"
-                        class="h5 d-flex align-items-center justify-content-center gap-2">Contact <i
-                            class="ti ti-link text-primary f-22"></i></a>
+                    <h3 class="feature-title">Workflow Otomatis</h3>
+                    <p class="feature-description">
+                        Proses persetujuan otomatis dari Rumah Tangga, Bagian Umum, hingga Pimpinan dengan notifikasi real-time.
+                    </p>
                 </div>
 
-            </div>
-        </div>
-    </section>
-    <!-- [ Pages ] end -->
-    <!-- [ Page-versions ] start -->
-  <section class="bg-white pt-0">
-    <div class="container">
-      <div class="row justify-content-center text-center">
-        <div class="col-md-8 col-xl-6">
-          <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Page Versions</h2>
-          <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">Unveil the diversity of page
-            layouts within Light Able, including Vertical, Horizontal, and Tab Layouts, each offering unique design
-            options to suit your preferences and project requirements.</p>
-        </div>
-      </div>
-      <div class="row g-4 text-center ">
-        <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.2s">
-          <div class="card layout-card">
-            <div class="card-body">
-              <img src="{{ URL::asset('build//images/landing/preview-page-dark.jpg') }}" alt="img" class="img-fluid border">
-            </div>
-          </div>
-          <span class="h5 d-flex align-items-center justify-content-center gap-2">Dark Version</span>
-        </div>
-        <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.4s">
-          <div class="card layout-card">
-            <div class="card-body">
-              <img src="{{ URL::asset('build//images/landing/preview-page-rtl.jpg') }}" alt="img" class="img-fluid border">
-            </div>
-          </div>
-          <span class="h5 d-flex align-items-center justify-content-center gap-2">RTL Version</span>
-        </div>
-        <div class="col-lg-4 col-md-6 wow animate__fadeInUp" data-wow-delay="0.6s">
-          <div class="card layout-card">
-            <div class="card-body">
-              <img src="{{ URL::asset('build//images/landing/preview-page-landing.jpg') }}" alt="img" class="img-fluid border">
-            </div>
-          </div>
-          <span class="h5 d-flex align-items-center justify-content-center gap-2">Landing Page</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- [ Page-versions ] end -->
-    <!-- [ Features ] start -->
-    <section class="bg-white product-section pt-0">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-xl-10">
-                    <h2 class="wow animate__fadeInUp section-title mb-0" data-wow-delay="0.2s">Key Features</h2>
-                </div>
-                <div class="col-md-8 col-xl-6">
-                    <p class="text-opacity-75 mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">
-                        Designed to streamline your development process and enhance user experiences. Following are the
-                        top features that bundle with Light Able Dashboard Template.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center product-cards-block">
-                <div class="col-xl-10">
-                    <div class="row justify-content-center text-center gy-sm-4 gy-3">
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="0.5s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-wechat-logo text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Pure JavaScript </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="0.6s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-shopping-cart text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Gulp Support</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="0.7s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-envelope-simple text-primary"></i>
-                                    <h5 class="mt-3 mb-0">SASS Support </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="0.8s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-user-circle-plus text-primary"></i>
-                                    <h5 class="mt-3 mb-0">6 Months Support</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="0.9s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-calendar-plus text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Free Updates</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">5+ Layouts </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-02">200+ UI Elements </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">100+ Form Elements </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">50+ Widgets </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Highly Responsive </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Documen-tation</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">10+ Form Plugins </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Text Editors </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Form Wizard </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">8+ Apps </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">10+ Auth Pages </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">Landing Page </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-3 col-6">
-                            <div class="card wow animate__fadeInUp" data-wow-delay="1.0s">
-                                <div class="card-body">
-                                    <i class="ph-duotone ph-lock-key text-primary"></i>
-                                    <h5 class="mt-3 mb-0">4 Level Menu </h5>
-                                </div>
-                            </div>
-                        </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <h3 class="feature-title">Mobile Friendly</h3>
+                    <p class="feature-description">
+                        Akses sistem kapan saja, di mana saja melalui smartphone atau tablet dengan tampilan responsif.
+                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- [ Features ] end -->
-    <!-- [ Testimonials ] start -->
-    <section class="bg-dark comminuties-section">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="text-white wow animate__fadeInUp section-title" data-wow-delay="0.2s">Testimonials</h2>
-                    <p class="text-white text-opacity-75 mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp"
-                        data-wow-delay="0.4s">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the
-                        industry's standard dummy text ever since the 1500s.</p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 wow animate__fadeInUp" data-wow-delay="0.6s">
-                    <div class="swiper comminuties-slides">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <p>This is probably one of my favorite admin themes yet. Looks great and easy to
-                                            use. Support is fantastic too. Thank you!</p>
-                                        <h5 class="mt-3 mb-0 text-primary text-end">- Support</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <p>Glad to see the designs and the components cleaness. Quality product with the
-                                            great
-                                            documenation.
-                                            Congratulations for the good work</p>
-                                        <h5 class="mt-3 mb-0 text-primary text-end">- Design Quality</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <p>This template is quite customizable and can handle any needs you have for
-                                            your admin dashboard.</p>
-                                        <h5 class="mt-3 mb-0 text-primary text-end">- Code Quality</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <p>I get all what I need for my project from this template so I can focus to
-                                            back end side. </p>
-                                        <h5 class="mt-3 mb-0 text-primary text-end">- Feature Availablity</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <p>Love this template. Tons of sharp components and examples. Keep up the good
-                                            work!</p>
-                                        <h5 class="mt-3 mb-0 text-primary text-end">- Feature Availablity</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- [ Testimonials ] end -->
-    <!-- [ widgets ] start -->
-    <!-- <section class="overflow-hidden pb-0">
-    <div class="container">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-md-8 col-xl-6">
-            <h2 class="wow animate__fadeInUp section-title" data-wow-delay="0.2s">Advance Widgets</h2>
-            <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">All widgets designed for different
-              Applications categories</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="widget-scroll"></div>
-  </section>
-  [ widgets ] end -->
-    <!-- [ Why ] start -->
-    <section class="bg-white feature-section">
-        <div class="container title mb-0">
-            <div class="row justify-content-center text-center wow animate__fadeInUp" data-wow-delay="0.2s"
-                style="visibility: visible; animation-delay: 0.2s; animation-name: animate__fadeInUp">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="mb-0 wow animate__fadeInUp section-title" data-wow-delay="0.1s">Why Light Able?</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.2s">
-                        Opt for Light Able for web development and unleash endless possibilities. Its sleek design,
-                        robust features, and unmatched flexibility enable effortless creation of stunning web
-                        applications. </p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row g-3">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.1s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-gauge f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>Dashboard of 2024</h5>
-                                    <p class="mb-0">Embracing the latest trends in design, Light Able emerges as a
-                                        standout Bootstrap admin template for 2024.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.2s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-sidebar-simple f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>Made for Performance</h5>
-                                    <p class="mb-0">Speed, ease of customization, and flexibility are three crucial
-                                        factors for any admin template. We're delighted to announce that Light Able
-                                        excels in these performance metrics. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.3s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-device-mobile-camera f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>Error-Free Code</h5>
-                                    <p class="mb-0">"Error Prohibited!!" Yes, we prioritize your project by
-                                        conducting thorough design and performance testing across all major modern
-                                        devices. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.4s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-sun-dim f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>On Time Support</h5>
-                                    <p class="mb-0">Problem? Write to us - using our <a
-                                            href="https://phoenixcoded.authordesk.app/" target="_blank"
-                                            title="Phoenixcoded Support Desk">support desk</a>. 99% query resolution in
-                                        first response within 1 day of time. 70% first response within 30mins. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.5s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-headset f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>Always Updated</h5>
-                                    <p class="mb-0">Rest assured, our package stays current with the latest plug-ins
-                                        and technologies. You'll receive email notifications for updates, along with
-                                        detailed changelogs and version history on our item page. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-none wow animate__fadeInUp mb-0" data-wow-delay="0.6s">
-                        <div class="card-body">
-                            <div class="media align-items-start">
-                                <div class="avtar bg-light-primary flex-shrink-0">
-                                    <i class="ph-duotone ph-arrow-clockwise f-24"></i>
-                                </div>
-                                <div class="media-body ms-3">
-                                    <h5>Effective Documentation</h5>
-                                    <p class="mb-0">Enjoy stress-free development with separate, regularly updated
-                                        help documentation of Light Able.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- [ Why ] end -->
-    <!-- [ numbers ] start -->
-    <section class="bg-white pt-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card bg-dark counter-block mb-0 wow animate__fadeInUp" data-wow-delay="0.7s">
-                        <img src="{{ URL::asset('build/images/landing/img-counter-bg.svg') }}" alt="img"
-                            class="img-fluid img-counter-bg">
-                        <div class="card-body p-4 p-md-5">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6 my-3">
-                                    <span class="h1 text-white mb-3 d-block">Trusted by Envato Elite Author</span>
 
-                                    <a href="https://themeforest.net/user/phoenixcoded" class="btn btn-primary"
-                                        target="_blank">Envato <i class="ph-duotone ph-arrow-square-out"></i></a>
-                                </div>
-                                <div class="col-lg-6 my-3">
-                                    <div class="row g-3 text-center">
-                                        <div class="col-4">
-                                            <span class="counter text-white">6.3K+</span>
-                                            <h4 class="f-w-400 mb-0 text-white text-opacity-50">Customers</h4>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class="counter text-white">10+</span>
-                                            <h4 class="f-w-400 mb-0 text-white text-opacity-50">Year</h4>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class="counter text-white">4.8/5</span>
-                                            <h4 class="f-w-400 mb-0 text-white text-opacity-50">Ratings</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
                     </div>
+                    <h3 class="feature-title">Notifikasi Pintar</h3>
+                    <p class="feature-description">
+                        Dapatkan notifikasi otomatis untuk setiap perubahan status, reminder, dan informasi penting lainnya.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Dashboard Analytics</h3>
+                    <p class="feature-description">
+                        Monitor utilisasi fasilitas dengan dashboard yang komprehensif dan laporan yang detail.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Keamanan Data</h3>
+                    <p class="feature-description">
+                        Sistem keamanan berlapis dengan enkripsi data dan kontrol akses berbasis role untuk melindungi informasi.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- [ numbers ] end -->
-    <!-- [ Pricing ] start -->
-    <!-- <section class="bg-dark">
-    <div class="container">
-      <div class="row justify-content-center text-center">
-        <div class="col-md-8 col-xl-6">
-          <h2 class="text-white wow animate__fadeInUp section-title" data-wow-delay="0.2s">Pricing</h2>
-          <p class="text-white text-opacity-75 mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.4s">
-            Pricing table help you to understand which type of license you required for your project. If you still have any question please contact us on our support desk</p>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-xl-4">
-          <div class="price-card wow animate__fadeInUp" data-wow-delay="0.2s">
-            <h3 class="h4 f-w-400 mb-0 text-white text-opacity-75">Single Use</h4>
-              <span class="price text-white">$35</span>
-              <ul class="list-unstyled text-start text-white text-opacity-50">
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> Use for single site</li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> 6 month premium Support
-                </li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> 1 year updates</li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> For Non-Paying users only
-                </li>
-              </ul>
-              <div class="d-grid">
-                <a href="https://phoenixcoded.com/item/datta-able-bootstrap-admin-template/" target="_blank"
-                  class="btn btn-outline-light">Buy Now</a>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-4">
-          <div class="price-card wow animate__fadeInUp" data-wow-delay="0.2s">
-            <div class="price-label text-white bg-primary">Popular</div>
-            <h3 class="h4 f-w-400 mb-0 text-white text-opacity-75">Multiple Use</h4>
-              <span class="price text-white">$129</span>
-              <ul class="list-unstyled text-start text-white text-opacity-50">
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> Use for upto 5 site</li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> 6 month premium Support
-                </li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> 1 year updates</li>
-                <li class="my-2"><i class="me-1 ti ti-check text-success"></i> For Non-Paying users only
-                </li>
-              </ul>
-              <div class="d-grid">
-                <a href="https://phoenixcoded.com/item/datta-able-bootstrap-admin-template/" target="_blank"
-                  class="btn btn-primary">Buy Now</a>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-    <!-- [ Pricing ] end -->
-    <!-- [ companies apps ] start -->
-    <section class="border-bottom py-lg-5 py-4">
+
+    <!-- Statistics Section -->
+    <section class="stats">
         <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-8 col-xl-6">
-                    <h2 class="wow animate__fadeInUp" data-wow-delay="0.1s">Trusted By</h2>
-                    <p class="mt-lg-4 mt-2 mb-4 mb-md-5 wow animate__fadeInUp" data-wow-delay="0.2s">Lorem Ipsum is
-                        simply dummy
-                        text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                        dummy
-                        text ever since the 1500s.</p>
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Ruangan Tersedia</span>
                 </div>
-                <div class="col-md-12">
-                    <div class="row justify-content-center client-block g-lg-4 g-3">
-                        <div class="col-auto wow animate__fadeInRight" data-wow-delay="0.3s"><img
-                                src="{{ URL::asset('build/images/landing/client-eagames.svg') }}" alt="img" class="img-fluid">
-                        </div>
-                        <div class="col-auto wow animate__fadeInRight" data-wow-delay="0.4s"><img
-                                src="{{ URL::asset('build/images/landing/client-haswent-2.svg') }}" alt="img" class="img-fluid">
-                        </div>
-                        <div class="col-auto wow animate__fadeInRight" data-wow-delay="0.5s"><img
-                                src="{{ URL::asset('build/images/landing/client-crystal-1.svg') }}" alt="img" class="img-fluid">
-                        </div>
-                        <div class="col-auto wow animate__fadeInRight" data-wow-delay="0.6s"><img
-                                src="{{ URL::asset('build/images/landing/client-vodafone.svg') }}" alt="img" class="img-fluid">
-                        </div>
-                        <div class="col-auto wow animate__fadeInRight" data-wow-delay="0.7s"><img
-                                src="{{ URL::asset('build/images/landing/client-eagames.svg') }}" alt="img" class="img-fluid">
-                        </div>
-                    </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Alat & Equipment</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Pengguna Aktif</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Tingkat Kepuasan</span>
                 </div>
             </div>
         </div>
     </section>
-    <!-- [ companies apps ] End -->
-    <!-- [ footer apps ] start -->
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-md-4 wow animate__fadeInUp" data-wow-delay="0.2s">
-                        <img src="{{ URL::asset('build/images/logo-dark.svg') }}" alt="image" class="img-fluid mb-3">
-                        <p class="mb-0">Since 2014, over 6.3K developers have placed their trust in Phoenixcoded's
-                            Templates. Light Able is managed by their experienced team of professionals.</p>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row gy-4">
-                            <div class="col-sm-4 wow animate__fadeInUp" data-wow-delay="0.6s">
-                                <h5 class="mb-sm-4 mb-2">Company</h5>
-                                <ul class="list-unstyled footer-link mb-0">
-                                    <li>
-                                        <a href="https://themeforest.net/user/phoenixcoded" target="_blank">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://themeforest.net/user/phoenixcoded/portfolio" target="_blank">Portfolio</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://themeforest.net/user/phoenixcoded/followers" target="_blank">Follow Us</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://phoenixcoded.net" target="_blank">Website</a>
-                                    </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-4 wow animate__fadeInUp" data-wow-delay="0.8s">
-                                    <h5 class="mb-sm-4 mb-2">Help & Support</h5>
-                                    <ul class="list-unstyled footer-link mb-0">
-                                    <li>
-                                        <a href="https://pcoded.gitbook.io/light-able" target="_blank">Documentation</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://phoenixcoded.authordesk.app/" target="_blank">Support</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://themeforest.net/user/phoenixcoded#contact" target="_blank">Reach Us</a>
-                                    </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-4 wow animate__fadeInUp" data-wow-delay="1s">
-                                    <h5 class="mb-sm-4 mb-2">Useful Resources</h5>
-                                    <ul class="list-unstyled footer-link mb-0">
-                                    <li>
-                                        <a href="https://themeforest.net/page/item_support_policy" target="_blank">Support Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://themeforest.net/licenses/standard" target="_blank">License</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title fade-in">Cara Kerja Sistem</h2>
+            <p class="section-subtitle fade-in">
+                Proses peminjaman yang sederhana dan efisien dalam 4 langkah mudah
+            </p>
+            
+            <div class="steps-container">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Cek Ketersediaan</h3>
+                    <p class="step-description">
+                        Login ke sistem dan cek ketersediaan ruangan atau alat yang ingin dipinjam secara real-time.
+                    </p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Ajukan Peminjaman</h3>
+                    <p class="step-description">
+                        Isi form pengajuan lengkap dengan dokumen persyaratan dan kirim untuk diproses.
+                    </p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Proses Persetujuan</h3>
+                    <p class="step-description">
+                        Sistem akan memproses persetujuan otomatis melalui Admin RT, Bagian Umum, dan Pimpinan.
+                    </p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Peminjaman Aktif</h3>
+                    <p class="step-description">
+                        Setelah disetujui, fasilitas siap digunakan. Jangan lupa mengembalikan tepat waktu!
+                    </p>
                 </div>
             </div>
         </div>
-        <!-- [ footer apps ] start -->
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SIP-Fasilitas UMB</h3>
+                <p>
+                    Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin. 
+                    Memudahkan civitas akademika dalam mengelola peminjaman ruangan dan alat kampus.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Jl. S.Parman No.18, Antasan Kecil Timur, Banjarmasin</p>
+                <p><i class="fas fa-phone"></i> (0511) 3252584</p>
+                <p><i class="fas fa-envelope"></i> info@umbjm.ac.id</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Menu Cepat</h3>
+                <p><a href="#home">Beranda</a></p>
+                <p><a href="#features">Fitur</a></p>
+                <p><a href="#how-it-works">Cara Kerja</a></p>
+                <p><a href="/login">Login Sistem</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Ikuti Kami</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
         <div class="footer-bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col my-1 wow animate__fadeInUp" data-wow-delay="0.4s">
-                        <p class="m-0">Made with &#9829; by Team <a
-                                href="https://themeforest.net/user/phoenixcoded" target="_blank"> Phoenixcoded</a>
-                        </p>
-                    </div>
-                    <div class="col-auto my-1">
-                        <ul class="list-inline footer-sos-link mb-0">
-                            <li class="list-inline-item wow animate__fadeInUp" data-wow-delay="0.4s">
-                                <a href="https://fb.com/phoenixcoded">
-                                    <i class="ph-duotone ph-facebook-logo f-20"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <p>&copy; 2024 SIP-Fasilitas UMB. Universitas Muhammadiyah Banjarmasin. All rights reserved.</p>
         </div>
     </footer>
-    <!-- [ footer apps ] End -->
-    <!-- [ Main Content ] end -->
-    <!-- Required Js -->
-    <script src="{{ URL::asset('build/js/plugins/popper.min.js') }}"></script>
-    <script src="{{ URL::asset('build/js/plugins/simplebar.min.js') }}"></script>
-    <script src="{{ URL::asset('build/js/plugins/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('build/js/fonts/custom-font.js') }}"></script>
-    <script src="{{ URL::asset('build/js/pcoded.js') }}"></script>
-    <script src="{{ URL::asset('build/js/plugins/feather.min.js') }}"></script>
+
     <script>
-        layout_change('light');
-    </script>
-    <script>
-        layout_sidebar_change('false');
-    </script>
-    <script>
-        change_box_container('false');
-    </script>
-    <script>
-        layout_caption_change('true');
-    </script>
-    <script>
-        layout_rtl_change('false');
-    </script>
-    <script>
-        preset_change("preset-1");
-    </script>
-    <!-- [Page Specific JS] start -->
-    <script src="{{ URL::asset('build/js/plugins/wow.min.js') }}"></script>
-    <script src="{{ URL::asset('build/js/plugins/swiper-bundle.js') }}"></script>
-    <script>
-      // Start [ Menu hide/show on scroll ]
-      let ost = 0;
-      document.addEventListener('scroll', function () {
-        let cOst = document.documentElement.scrollTop;
-        if (cOst == 0) {
-          document.querySelector('.navbar').classList.add('top-nav-collapse');
-        } else if (cOst > ost) {
-          document.querySelector('.navbar').classList.add('top-nav-collapse');
-          document.querySelector('.navbar').classList.remove('default');
-        } else {
-          document.querySelector('.navbar').classList.add('default');
-          document.querySelector('.navbar').classList.remove('top-nav-collapse');
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + (counter.textContent.includes('%') ? '%' : '+');
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
+                    }
+                };
+                
+                updateCounter();
+            });
         }
-        ost = cOst;
-      });
-      // End [ Menu hide/show on scroll ]
-      var wow = new WOW({
-        animateClass: 'animate__animated'
-      });
-      wow.init();
-  
-      // slider start
-      const price_Swiper = new Swiper('.price-slides', {
-        loop: true,
-        slidesPerView: '1',
-        centeredSlides: true,
-        spaceBetween: 20,
-        navigation: {
-          prevEl: '.customPrev-btn',
-          nextEl: '.customNext-btn'
-        },
-      });
-  
-      const why_Swiper = new Swiper('.why-slides', {
-        loop: true,
-        slidesPerView: '3.5',
-        centeredSlides: true,
-        spaceBetween: 20,
-        autoplay: {
-          delay: 2500,
-        },
-        navigation: {
-          prevEl: '.slidePrev-btn',
-          nextEl: '.slideNext-btn'
-        },
-        breakpoints: {
-          0: {
-            slidesPerView: 1.2,
-            spaceBetween: 10,
-          },
-          592: {
-            slidesPerView: 1.8,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: '3.5',
-            spaceBetween: 20,
-          },
-        },
-      });
-      const swiper = new Swiper(".comminuties-slides", {
-        loop: true,
-        centeredSlides: false,
-        autoplay: {
-          delay: 2000,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          0: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-        },
-      });
-      const langugae_swiper = new Swiper(".language-slides", {
-        slidesPerView: 8,
-        spaceBetween: 20,
-        loop: true,
-        speed: 1000,
-        direction: 'horizontal',
-        centeredSlides: true,
-        autoplay: {
-          delay: 2000,
-        },
-        breakpoints: {
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          520: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-          720: {
-            slidesPerView: 4,
-            spaceBetween: 10,
-          },
-          900: {
-            slidesPerView: 5,
-            spaceBetween: 10,
-          },
-          1100: {
-            slidesPerView: 6,
-            spaceBetween: 10,
-          },
-          1280: {
-            slidesPerView: 7,
-            spaceBetween: 20,
-          },
-          1400: {
-            slidesPerView: 8,
-            spaceBetween: 20,
-          },
-        },
-      });
-  
-      const langugae_swiper_hero = new Swiper(".language-slides-hero", {
-        slidesPerView: 8,
-        speed: 1000,
-        slidesPerView: 1,
-        autoplay: {
-          delay: 2000,
-        },
-        thumbs: {
-          swiper: langugae_swiper,
-        },
-      });
-  
+
+        // Start counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+
+        // Mobile menu toggle (if needed)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            const speed = 0.5;
+
+            parallax.forEach(element => {
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
     </script>
 </body>
-
 </html>
