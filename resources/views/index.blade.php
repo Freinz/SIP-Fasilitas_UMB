@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIP-Fasilitas UMB | Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin</title>
+    <link rel="icon" href="{{ URL::asset('image/umb-logo.png') }}" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -181,7 +183,8 @@
             animation: fadeInUp 1s ease 1.2s forwards;
         }
 
-        .cta-primary, .cta-secondary {
+        .cta-primary,
+        .cta-secondary {
             padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
@@ -421,7 +424,8 @@
             color: #ecf0f1;
         }
 
-        .footer-section p, .footer-section a {
+        .footer-section p,
+        .footer-section a {
             color: #bdc3c7;
             text-decoration: none;
             line-height: 1.8;
@@ -469,6 +473,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -476,9 +481,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-20px);
             }
@@ -529,6 +537,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -563,12 +572,12 @@
         <div class="floating-element">
             <i class="fas fa-clipboard-list" style="font-size: 3.5rem;"></i>
         </div>
-        
+
         <div class="hero-content">
             <h1 class="hero-title">SIP-Fasilitas UMB</h1>
             <p class="hero-subtitle">Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin</p>
             <p class="hero-description">
-                Solusi digital terdepan untuk mengelola peminjaman ruangan dan alat di kampus. 
+                Solusi digital terdepan untuk mengelola peminjaman ruangan dan alat di kampus.
                 Proses yang lebih efisien, transparan, dan mudah untuk seluruh civitas akademika.
             </p>
             <div class="cta-buttons">
@@ -591,7 +600,7 @@
             <p class="section-subtitle fade-in">
                 Sistem yang dirancang khusus untuk mempermudah proses peminjaman fasilitas kampus
             </p>
-            
+
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
@@ -607,12 +616,12 @@
                     <div class="feature-icon">
                         <!-- SVG icon for workflow -->
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="8" y="8" width="32" height="32" rx="8" fill="url(#workflow-gradient)"/>
-                            <path d="M16 24H32M16 24L20 20M16 24L20 28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="8" y="8" width="32" height="32" rx="8" fill="url(#workflow-gradient)" />
+                            <path d="M16 24H32M16 24L20 20M16 24L20 28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             <defs>
                                 <linearGradient id="workflow-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#667eea"/>
-                                    <stop offset="1" stop-color="#764ba2"/>
+                                    <stop stop-color="#667eea" />
+                                    <stop offset="1" stop-color="#764ba2" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -697,7 +706,7 @@
             <p class="section-subtitle fade-in">
                 Proses peminjaman yang sederhana dan efisien dalam 4 langkah mudah
             </p>
-            
+
             <div class="steps-container">
                 <div class="step fade-in">
                     <div class="step-number">1</div>
@@ -706,7 +715,7 @@
                         Login ke sistem dan cek ketersediaan ruangan atau alat yang ingin dipinjam secara real-time.
                     </p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">2</div>
                     <h3 class="step-title">Ajukan Peminjaman</h3>
@@ -714,7 +723,7 @@
                         Isi form pengajuan lengkap dengan dokumen persyaratan dan kirim untuk diproses.
                     </p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">3</div>
                     <h3 class="step-title">Proses Persetujuan</h3>
@@ -722,7 +731,7 @@
                         Sistem akan memproses persetujuan otomatis melalui Admin RT, Bagian Umum, dan Pimpinan.
                     </p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">4</div>
                     <h3 class="step-title">Peminjaman Aktif</h3>
@@ -740,18 +749,18 @@
             <div class="footer-section">
                 <h3>SIP-Fasilitas UMB</h3>
                 <p>
-                    Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin. 
+                    Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin.
                     Memudahkan civitas akademika dalam mengelola peminjaman ruangan dan alat kampus.
                 </p>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Kontak Kami</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Jl. S.Parman No.18, Antasan Kecil Timur, Banjarmasin</p>
                 <p><i class="fas fa-phone"></i> (0511) 3252584</p>
                 <p><i class="fas fa-envelope"></i> info@umbjm.ac.id</p>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Menu Cepat</h3>
                 <p><a href="#home">Beranda</a></p>
@@ -759,7 +768,7 @@
                 <p><a href="#how-it-works">Cara Kerja</a></p>
                 <p><a href="/login">Login Sistem</a></p>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Ikuti Kami</h3>
                 <div class="social-links">
@@ -770,7 +779,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2024 SIP-Fasilitas UMB. Universitas Muhammadiyah Banjarmasin. All rights reserved.</p>
         </div>
@@ -779,7 +788,7 @@
     <script>
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -828,7 +837,7 @@
                 const target = parseInt(counter.textContent);
                 const increment = target / 100;
                 let current = 0;
-                
+
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
@@ -838,7 +847,7 @@
                         counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
                     }
                 };
-                
+
                 updateCounter();
             });
         }
@@ -852,7 +861,9 @@
                     statsObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.5 });
+        }, {
+            threshold: 0.5
+        });
 
         statsObserver.observe(statsSection);
 
@@ -879,4 +890,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Home')
+@section('title', 'SIP Fasilitas UM Banjarmasin')
 @section('breadcrumb-item', 'Dashboard')
 
 @section('breadcrumb-item-active', 'Home')

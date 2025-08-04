@@ -14,7 +14,7 @@
     <meta name="author" content="phoenixcoded">
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ URL::asset('build/images/favicon.svg') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ URL::asset('image/umb-logo.png') }}" type="image/png">
     <!-- [Page specific CSS] start -->
     <link href="{{ URL::asset('build/css/plugins/animate.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('build/css/plugins/swiper-bundle.css') }}" rel="stylesheet">

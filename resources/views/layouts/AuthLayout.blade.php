@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title') | Light Able Laravel 11 Admin & Dashboard Template</title>
+    <title>@yield('title') | Sistem Peminjaman Fasilitas Universitas Muhammadiyah Banjarmasin</title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -14,7 +14,7 @@
     <meta name="author" content="phoenixcoded">
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ URL::asset('build/images/favicon.svg') }}" type="image/x-icon">
+        <link rel="icon" href="{{ URL::asset('image/umb-logo.png') }}" type="image/png">
     @yield('css')
 
     @include('layouts.head-css')
