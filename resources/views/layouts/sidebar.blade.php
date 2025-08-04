@@ -1,18 +1,18 @@
 <!-- [ Sidebar Menu ] start -->
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
-        <div class="m-header">
-            <a href="/dashboard" class="b-brand text-primary">
+        <div class="m-header d-flex align-items-center justify-content-center" style="gap:10px;">
+            <a href="/dashboard" class="b-brand text-primary d-flex align-items-center">
                 <!-- ========   Change your logo from here   ============ -->
-                <img src="{{ URL::asset('build/images/logo-dark.svg') }}" alt="logo image" class="logo-lg">
-                <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version">v1.0</span>
+                <img src="{{ URL::asset('image/umb-logo.png') }}" style="max-width:60px; height:auto;" alt="logo Universitas Muhammadiyah Banjarmasin">
+                <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version" style="vertical-align:middle;">SIP Fasilitas UM Banjarmasin</span>
             </a>
         </div>
         <div class="navbar-content">
             <ul class="pc-navbar">
                 @include('layouts.menu-list')
             </ul>
-           
+
         </div>
         <div class="card pc-user-card">
             <div class="card-body">
