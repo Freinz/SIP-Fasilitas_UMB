@@ -44,6 +44,8 @@
 
     @include('layouts.footerjs')
 
+    @include('sweetalert::alert')
+
     @yield('scripts')
 
   </body>

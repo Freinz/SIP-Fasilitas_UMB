@@ -36,6 +36,19 @@ Route::middleware(['auth'])->group(function () {
 
     // All Users page for superadmin
     Route::get('/users', [UserController::class, 'show'])->name('users.show');
+
+    // Add new user form
+    Route::get('/users/add', [UserController::class, 'create'])->name('users.create');
+    // Store new user
+    Route::post('/store_user_superadmin', [UserController::class, 'store'])->name('users.store');
+
+    // Edit user form
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    // Update user
+    Route::post('/user_edit/{id}', [UserController::class, 'update'])->name('users.update');
+
+    // Delete user
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     // Define a GET route with dynamic placeholders for route parameters
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
 });

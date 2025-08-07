@@ -21,7 +21,6 @@
     <ul class="pc-submenu">
         <li class="pc-item"><a class="pc-link" href="/users">All Users</a></li>
         <li class="pc-item"><a class="pc-link" href="/users/add">Add New User</a></li>
-        <li class="pc-item"><a class="pc-link" href="/users/import">Import Users</a></li>
         <li class="pc-item"><a class="pc-link" href="/user-roles">User Roles</a></li>
     </ul>
 </li>
