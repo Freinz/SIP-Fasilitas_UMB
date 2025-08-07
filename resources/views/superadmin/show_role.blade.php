@@ -1,50 +1,35 @@
 @extends('layouts.main')
 
-@section('title', 'All Users')
+@section('title', 'All Roles')
 
 @section('content')
 <div class="card mt-4">
     <div class="card-header">
-        <h5>All Users</h5>
+        <h5>All Roles</h5>
     </div>
     <div class="card-body">
+        <a href="{{ route('roles.create') }}" class="btn btn-primary mb-3">Tambah Role</a>
         <table id="pc-dt-simple" class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>NIM/NIP</th>
-                    <th>Role</th>
-                    <th>Active</th>
+                    <th>Guard Name</th>
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @foreach($roles as $role)
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone ?? '-' }}</td>
-                    <td>{{ $user->nim_nip ?? '-' }}</td>
+                    <td>{{ $role->name }}</td>
+                    <td>{{ $role->guard_name ?? '-' }}</td>
+                    <td>{{ $role->created_at->format('d M Y') }}</td>
                     <td>
-                        @if($user->roles->count())
-                            @foreach($user->roles as $role)
-                                <span class="badge bg-primary">{{ $role->name }}</span>
-                            @endforeach
-                        @else
-                            <span class="text-muted">-</span>
-                        @endif
-                    </td>
-                    <td>{{ $user->is_active_label }}</td>
-                    <td>{{ $user->created_at->format('d M Y') }}</td>
-                    <td>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" class="delete-form">
+                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline-block;" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="btn btn-sm btn-danger delete-button" data-id="{{ $user->id }}">Delete</button>
+                            <button type="button" class="btn btn-sm btn-danger delete-button" data-id="{{ $role->id }}">Delete</button>
                         </form>
                     </td>
                 </tr>

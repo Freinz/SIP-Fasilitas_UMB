@@ -49,6 +49,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Delete user
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Role CRUD routes
+    Route::get('/user-roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles.show');
+    Route::get('/user-roles/add', [\App\Http\Controllers\RoleController::class, 'create'])->name('roles.create');
+    Route::post('/user-roles/store', [\App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
+    Route::get('/user-roles/{id}/edit', [\App\Http\Controllers\RoleController::class, 'edit'])->name('roles.edit');
+    Route::post('/user-roles/{id}/update', [\App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/user-roles/{id}', [\App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
+
     // Define a GET route with dynamic placeholders for route parameters
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
 });

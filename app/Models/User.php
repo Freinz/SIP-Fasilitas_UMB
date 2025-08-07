@@ -7,12 +7,13 @@ use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasRoles, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +25,6 @@ class User extends Authenticatable
         'email',
         'phone',
         'nim_nip',
-        'user_type',
         'ktm_number',
         'password',
         'is_active',
@@ -89,15 +89,5 @@ class User extends Authenticatable
         return $this->hasMany(notification::class, 'user_id');
     }
 
-    // Relasi ke roles (Many to Many)
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
-    }
-
-    // Relasi ke permissions (Many to Many)
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class, 'model_has_permissions', 'model_id', 'permission_id');
-    }
+    // ...existing code...
 }

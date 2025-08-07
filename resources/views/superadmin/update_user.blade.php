@@ -49,14 +49,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="user_type">Role User</label>
-                                <select class="form-control" name="user_type" id="user_type" required>
+                                <label class="form-label" for="role">Role User</label>
+                                <select class="form-control" name="role" id="role" required>
                                     <option value="">Pilih Role</option>
-                                    <option value="mahasiswa" {{ $data->user_type == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
-                                    <option value="admin_rt" {{ $data->user_type == 'admin_rt' ? 'selected' : '' }}>Admin RT</option>
-                                    <option value="admin_umum" {{ $data->user_type == 'admin_umum' ? 'selected' : '' }}>Admin Umum</option>
-                                    <option value="pimpinan" {{ $data->user_type == 'pimpinan' ? 'selected' : '' }}>Pimpinan</option>
-                                    <option value="superadmin" {{ $data->user_type == 'superadmin' ? 'selected' : '' }}>Superadmin</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}" {{ (isset($userRole) && $userRole == $role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">

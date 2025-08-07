@@ -55,14 +55,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" for="user_type">Role User</label>
-                                <select class="form-control" name="user_type" id="user_type" required>
+                                <label class="form-label" for="role">Role User</label>
+                                <select class="form-control" name="role" id="role" required>
                                     <option value="">Pilih Role</option>
-                                    <option value="mahasiswa">Mahasiswa</option>
-                                    <option value="admin_rt">Admin RT</option>
-                                    <option value="admin_umum">Admin Umum</option>
-                                    <option value="pimpinan">Pimpinan</option>
-                                    <option value="superadmin">Superadmin</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

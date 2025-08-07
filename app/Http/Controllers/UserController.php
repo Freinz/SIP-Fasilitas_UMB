@@ -10,7 +10,8 @@ class UserController extends Controller
     // Show add user form
     public function create()
     {
-        return view('superadmin.input_user');
+        $roles = \Spatie\Permission\Models\Role::all();
+        return view('superadmin.input_user', compact('roles'));
     }
 
     // Store new user
@@ -21,15 +22,17 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'phone' => 'nullable|string|max:255',
             'nim_nip' => 'nullable|string|max:255',
-            'user_type' => 'required|in:mahasiswa,admin_rt,admin_umum,pimpinan,superadmin',
             'ktm_number' => 'nullable|string|max:255',
             'is_active' => 'required|boolean',
             'password' => 'nullable|string|min:6',
+            'role' => 'required|exists:roles,name',
         ]);
 
         $validated['password'] = bcrypt($request->input('password', '12345678'));
+        $roleName = $validated['role'];
+        unset($validated['role']);
         $user = User::create($validated);
-        
+        $user->assignRole($roleName);
         Alert::success('Sukses', 'User berhasil ditambahkan');
         return redirect()->route('users.show');
     }
@@ -38,7 +41,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::findOrFail($id);
-        return view('superadmin.update_user', compact('data'));
+        $roles = \Spatie\Permission\Models\Role::all();
+        $userRole = $data->roles->pluck('name')->first();
+        return view('superadmin.update_user', compact('data', 'roles', 'userRole'));
     }
 
     // Update user
@@ -50,11 +55,14 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'nullable|string|max:255',
             'nim_nip' => 'nullable|string|max:255',
-            'user_type' => 'required|in:mahasiswa,admin_rt,admin_umum,pimpinan,superadmin',
             'ktm_number' => 'nullable|string|max:255',
             'is_active' => 'required|boolean',
+            'role' => 'required|exists:roles,name',
         ]);
+        $roleName = $validated['role'];
+        unset($validated['role']);
         $user->update($validated);
+        $user->syncRoles([$roleName]);
         Alert::success('Sukses', 'User berhasil diperbarui');
         return redirect()->route('users.show');
     }

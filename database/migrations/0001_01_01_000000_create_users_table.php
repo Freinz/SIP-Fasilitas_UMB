@@ -19,14 +19,12 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('phone', 255)->nullable();
             $table->string('nim_nip', 255)->nullable();
-            $table->enum('user_type', ['mahasiswa', 'admin_rt', 'admin_umum', 'pimpinan', 'superadmin']);
             $table->string('ktm_number', 255)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
             $table->boolean('is_active')->default(true);
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
-            $table->index('user_type');
             $table->index('is_active');
         });
 
@@ -45,21 +43,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        // Insert default superadmin user
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@phoenixcoded.com',
-            'phone' => null,
-            'nim_nip' => null,
-            'user_type' => 'superadmin',
-            'ktm_number' => null,
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678'),
-            'is_active' => true,
-            'remember_token' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // ...existing code...
     }
 
     /**
