@@ -26,12 +26,16 @@ Auth::routes();
 
 
 // Define a group of routes with 'auth' middleware applied
+use App\Http\Controllers\UserController;
+
 Route::middleware(['auth'])->group(function () {
     // Redirect /dashboard to dashboard view
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // All Users page for superadmin
+    Route::get('/users', [UserController::class, 'show'])->name('users.show');
     // Define a GET route with dynamic placeholders for route parameters
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
 });

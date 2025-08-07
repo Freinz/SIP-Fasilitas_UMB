@@ -3,8 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\role;
-use App\Models\permission;
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +22,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'nim_nip',
+        'user_type',
+        'ktm_number',
         'password',
+        'is_active',
+        'remember_token',
     ];
 
     /**
@@ -34,6 +40,29 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Get the user's type (role).
+     */
+    public function getUserTypeLabelAttribute()
+    {
+        $types = [
+            'mahasiswa' => 'Mahasiswa',
+            'admin_rt' => 'Admin RT',
+            'admin_umum' => 'Admin Umum',
+            'pimpinan' => 'Pimpinan',
+            'superadmin' => 'Superadmin',
+        ];
+        return $types[$this->user_type] ?? $this->user_type;
+    }
+
+    /**
+     * Get the user's active status as label.
+     */
+    public function getIsActiveLabelAttribute()
+    {
+        return $this->is_active ? 'Active' : 'Inactive';
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -63,12 +92,12 @@ class User extends Authenticatable
     // Relasi ke roles (Many to Many)
     public function roles()
     {
-        return $this->belongsToMany(role::class, 'model_has_roles', 'model_id', 'role_id');
+        return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
     }
 
     // Relasi ke permissions (Many to Many)
     public function permissions()
     {
-        return $this->belongsToMany(permission::class, 'model_has_permissions', 'model_id', 'permission_id');
+        return $this->belongsToMany(Permission::class, 'model_has_permissions', 'model_id', 'permission_id');
     }
 }
