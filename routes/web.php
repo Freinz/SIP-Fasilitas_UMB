@@ -68,7 +68,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/permission-settings/{id}/update', [\App\Http\Controllers\PermissionSettingsController::class, 'update'])->name('permissions.update');
     Route::delete('/permission-settings/{id}', [\App\Http\Controllers\PermissionSettingsController::class, 'destroy'])->name('permissions.destroy');
     Route::post('/permission-settings/assign', [\App\Http\Controllers\PermissionSettingsController::class, 'assign'])->name('permissions.assign');
+    // Access Control routes
     Route::get('/access-control', [\App\Http\Controllers\AccessControlController::class, 'index'])->name('access.control');
+    Route::get('/access-control/{id}/edit', [\App\Http\Controllers\AccessControlController::class, 'edit'])->name('access.control.edit');
+    Route::post('/access-control/{id}/update', [\App\Http\Controllers\AccessControlController::class, 'update'])->name('access.control.update');
 
     // Define a GET route with dynamic placeholders for route parameters
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
