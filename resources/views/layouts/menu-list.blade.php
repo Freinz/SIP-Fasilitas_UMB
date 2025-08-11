@@ -20,7 +20,6 @@
     <a href="#!" class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-users"></i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
     <ul class="pc-submenu">
         <li class="pc-item"><a class="pc-link" href="/users">All Users</a></li>
-        <li class="pc-item"><a class="pc-link" href="/users/add">Add New User</a></li>
         <li class="pc-item"><a class="pc-link" href="/user-roles">User Roles</a></li>
     </ul>
 </li>

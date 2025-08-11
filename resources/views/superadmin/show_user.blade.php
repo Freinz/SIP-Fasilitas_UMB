@@ -8,6 +8,7 @@
         <h5>All Users</h5>
     </div>
     <div class="card-body">
+        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
         <table id="pc-dt-simple" class="table table-bordered table-hover">
             <thead>
                 <tr>
