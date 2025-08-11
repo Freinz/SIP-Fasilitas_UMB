@@ -2,16 +2,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
-use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class RoleManagementController extends Controller
 {
     // Show all roles
-    public function show()
+    public function index()
     {
         $roles = Role::all();
-        return view('superadmin.show_role', compact('roles'));
+        return view('permissions.role_management', compact('roles'));
     }
 
     // Show add role form
@@ -28,8 +27,8 @@ class RoleController extends Controller
         ]);
         $validated['guard_name'] = 'web';
         Role::create($validated);
-        Alert::success('Sukses', 'Role berhasil ditambahkan');
-        return redirect()->route('roles.show');
+        \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Role berhasil ditambahkan');
+        return redirect()->route('role.management');
     }
 
     // Show edit role form
@@ -48,8 +47,8 @@ class RoleController extends Controller
         ]);
         $validated['guard_name'] = 'web';
         $role->update($validated);
-        Alert::success('Sukses', 'Role berhasil diperbarui');
-        return redirect()->route('roles.show');
+        \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Role berhasil diperbarui');
+        return redirect()->route('role.management');
     }
 
     // Delete role
@@ -57,7 +56,7 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
-        Alert::success('Sukses', 'Role berhasil dihapus');
-        return redirect()->route('roles.show');
+        \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Role berhasil dihapus');
+        return redirect()->route('role.management');
     }
 }
