@@ -47,12 +47,12 @@
                 </select>
             </div>
             <div class="col-auto">
-                <select name="permission_id" class="form-control" required>
-                    <option value="">Pilih Permission</option>
+                <select name="permission_ids[]" class="form-control" multiple required>
                     @foreach($permissions as $permission)
                         <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                     @endforeach
                 </select>
+                <small class="text-muted">* Tekan Ctrl untuk memilih lebih dari satu permission</small>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-success">Assign</button>

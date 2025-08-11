@@ -33,8 +33,9 @@ class PermissionSettingsController extends Controller
     // Show edit permission form
     public function edit($id)
     {
-        $data = Permission::findOrFail($id);
-        return view('permissions.update_permission', compact('data'));
+        $data = Permission::with('roles')->findOrFail($id);
+        $roles = \Spatie\Permission\Models\Role::all();
+        return view('permissions.update_permission', compact('data', 'roles'));
     }
 
     // Update permission
@@ -43,10 +44,18 @@ class PermissionSettingsController extends Controller
         $permission = Permission::findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:permissions,name,' . $id,
-            'guard_name' => 'required|string|max:255',
         ]);
-        $permission->update($validated);
-        \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Permission berhasil diperbarui');
+        $permission->update(['name' => $validated['name']]);
+        // Update roles terkait
+        $roles = $request->input('roles', []);
+        $permission->roles()->sync([]); // Unassign semua role dulu
+        foreach ($roles as $roleName) {
+            $role = \Spatie\Permission\Models\Role::where('name', $roleName)->first();
+            if ($role) {
+                $role->givePermissionTo($permission->name);
+            }
+        }
+        \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Permission dan role terkait berhasil diperbarui');
         return redirect()->route('permission.settings');
     }
 
@@ -64,11 +73,12 @@ class PermissionSettingsController extends Controller
     {
         $validated = $request->validate([
             'role_id' => 'required|exists:roles,id',
-            'permission_id' => 'required|exists:permissions,id',
+            'permission_ids' => 'required|array',
+            'permission_ids.*' => 'exists:permissions,id',
         ]);
         $role = \Spatie\Permission\Models\Role::findOrFail($validated['role_id']);
-        $permission = Permission::findOrFail($validated['permission_id']);
-        $role->givePermissionTo($permission->name);
+        $permissions = Permission::whereIn('id', $validated['permission_ids'])->pluck('name')->toArray();
+        $role->givePermissionTo($permissions);
         \RealRashid\SweetAlert\Facades\Alert::success('Sukses', 'Permission berhasil di-assign ke role');
         return redirect()->route('permission.settings');
     }

@@ -17,19 +17,19 @@
 
 <li class="pc-item pc-caption"><label>👥 User Management</label></li>
 <li class="pc-item pc-hasmenu">
-    <a href="#!" class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-users"></i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-    <ul class="pc-submenu">
-        <li class="pc-item"><a class="pc-link" href="/users">All Users</a></li>
-        <li class="pc-item"><a class="pc-link" href="/user-roles">User Roles</a></li>
-    </ul>
+<a href="#!" class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-users"></i></span><span class="pc-mtext">Users</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+<ul class="pc-submenu">
+    <li class="pc-item"><a class="pc-link" href="/users">All Users</a></li>
+    <li class="pc-item"><a class="pc-link" href="/user-roles">User Roles</a></li>
+</ul>
 </li>
 <li class="pc-item pc-hasmenu">
-    <a href="#!" class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-shield"></i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-    <ul class="pc-submenu">
-        <li class="pc-item"><a class="pc-link" href="/role-management">Role Management</a></li>
-        <li class="pc-item"><a class="pc-link" href="/permission-settings">Permission Settings</a></li>
-        <li class="pc-item"><a class="pc-link" href="/access-control">Access Control</a></li>
-    </ul>
+<a href="#!" class="pc-link"><span class="pc-micon"><i class="ph-duotone ph-shield"></i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+<ul class="pc-submenu">
+    <li class="pc-item"><a class="pc-link" href="/role-management">Role Management</a></li>
+    <li class="pc-item"><a class="pc-link" href="/permission-settings">Permission Settings</a></li>
+    <li class="pc-item"><a class="pc-link" href="/access-control">Access Control</a></li>
+</ul>
 </li>
 
 <li class="pc-item pc-caption"><label>🏢 Master Data</label></li>

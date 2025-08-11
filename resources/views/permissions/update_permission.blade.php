@@ -12,9 +12,13 @@
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label for="guard_name" class="form-label">Guard Name</label>
-                <input type="text" name="guard_name" class="form-control @error('guard_name') is-invalid @enderror" value="{{ old('guard_name', $data->guard_name) }}" required>
-                @error('guard_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                <label for="roles" class="form-label">Role Terkait</label>
+                <select name="roles[]" id="roles" class="form-control" multiple>
+                    @foreach($roles as $role)
+                        <option value="{{ $role->name }}" {{ $data->roles->contains('name', $role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                    @endforeach
+                </select>
+                <small class="text-muted">* Tekan Ctrl untuk memilih lebih dari satu</small>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{ route('permission.settings') }}" class="btn btn-secondary">Batal</a>
