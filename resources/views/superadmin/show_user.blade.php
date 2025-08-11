@@ -8,7 +8,9 @@
         <h5>All Users</h5>
     </div>
     <div class="card-body">
+        @role('superadmin')
         <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
+        @endrole
         <table id="pc-dt-simple" class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -19,7 +21,9 @@
                     <th>Role</th>
                     <th>Active</th>
                     <th>Created At</th>
+                    @role('superadmin')
                     <th>Action</th>
+                    @endrole
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +44,7 @@
                     </td>
                     <td>{{ $user->is_active_label }}</td>
                     <td>{{ $user->created_at->format('d M Y') }}</td>
+                    @role('superadmin')
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" class="delete-form">
@@ -48,6 +53,7 @@
                             <button type="button" class="btn btn-sm btn-danger delete-button" data-id="{{ $user->id }}">Delete</button>
                         </form>
                     </td>
+                    @endrole
                 </tr>
                 @endforeach
             </tbody>
