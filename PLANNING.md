@@ -92,3 +92,30 @@ DRAFT → SUBMITTED → CHECKED → APPROVED → RECOMMENDATION_ISSUED → CONFI
 > - Setiap fitur baru harus dicek kesesuaiannya dengan alur, entitas, dan status flow di atas.
 > - Checklist dan roadmap dapat diperbarui sesuai kebutuhan bersama.
 > - Selalu review dokumen ini sebelum memulai/mengubah fitur!
+
+---
+
+## CHECKLIST PROGRES IMPLEMENTASI
+
+- [x] Struktur model utama (User, Room, Equipment, LoanRequest, LoanItem, Approval, KtmGuarantee, dst)
+- [x] File migrasi database untuk entitas utama
+- [x] Autentikasi user (login, register, reset password)
+- [x] Integrasi role & permission (spatie/laravel-permission)
+- [x] Integrasi sweetalert
+- [x] Struktur view/layout dasar
+- [ ] Struktur modular controller (Admin/Loan/Dashboard)
+- [ ] Fitur peminjaman alat/ruangan (LoanRequest, LoanItem)
+- [ ] Fitur approval multi-level (Admin Rumah Tangga, Bagian Umum, Pimpinan)
+- [ ] Fitur upload dokumen persyaratan
+- [ ] Fitur notifikasi (email/whatsapp/in-app)
+- [ ] Fitur dashboard untuk masing-masing aktor
+- [ ] Fitur laporan peminjaman & executive summary
+- [ ] Fitur pengembalian & pengelolaan jaminan KTM
+- [ ] Implementasi status flow peminjaman (DRAFT → COMPLETED)
+- [ ] Integrasi activity log (spatie/laravel-activitylog)
+- [ ] Export PDF/Excel (barryvdh/laravel-dompdf, maatwebsite/excel)
+- [ ] Real-time notification (pusher/pusher-php-server)
+- [ ] Mobile responsiveness
+- [ ] API integrasi (jika diperlukan)
+
+> Checklist ini dapat diupdate setiap ada progres baru.
