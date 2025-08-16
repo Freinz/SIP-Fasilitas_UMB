@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Dashboard\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,17 +25,22 @@ Route::get('/', function () {
     return view('index');
 });
 
-Auth::routes();
+
+// Nonaktifkan route register
+Auth::routes(['register' => false]);
+
+// Jika ada yang akses /register, arahkan ke 404
+Route::get('/register', function() {
+    abort(404);
+});
 
 
 // Define a group of routes with 'auth' middleware applied
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth'])->group(function () {
-    // Redirect /dashboard to dashboard view
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Dashboard route menggunakan controller
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User CRUD routes
     Route::get('/users', [UserController::class, 'show'])->name('users.show')->middleware('permission:user.view');

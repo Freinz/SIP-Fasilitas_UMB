@@ -29,13 +29,8 @@
                     @enderror
                     </div>
                     <div class="d-flex mt-1 justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input class="form-check-input input-primary" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label text-muted" for="remember">Remember me?</label>
-                        </div>
-                        <a href="{{ route('password.request') }}">
-                            <h6 class="f-w-400 mb-0">Forgot Password?</h6>
-                        </a>
+                     
+                        
                     </div>
                     <div class="d-grid mt-4">
                         <button type="submit" class="btn btn-primary">Login</button>
