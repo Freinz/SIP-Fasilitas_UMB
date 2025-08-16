@@ -17,7 +17,12 @@ class room extends Model
         'location',
         'image_path',
         'is_active',
+        'category_id',
     ];
+    public function category()
+    {
+        return $this->belongsTo(room_category::class, 'category_id');
+    }
 
     // Relasi ke loan_rooms (One to Many)
     public function loanRooms()

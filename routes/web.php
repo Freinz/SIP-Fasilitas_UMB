@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Loan\LoanRequestController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\DashboardController;
 
@@ -37,12 +38,27 @@ Route::get('/register', function() {
 
 // Define a group of routes with 'auth' middleware applied
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\RoomController;
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard route menggunakan controller
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // User CRUD routes
+
+    // Room Management
+    Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+    Route::get('/rooms/add', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('/rooms/store', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('/room-categories', [RoomController::class, 'categories'])->name('rooms.categories');
+
+    // Loan Equipment (Peminjaman Alat)
+    Route::get('/loan-equipment/create', [LoanRequestController::class, 'createEquipment'])->name('loan.equipment.create');
+    Route::post('/loan-equipment/store', [LoanRequestController::class, 'storeEquipment'])->name('loan.equipment.store');
+
+    // Loan Room (Peminjaman Ruangan)
+    Route::get('/loan-room/create', [LoanRequestController::class, 'createRoom'])->name('loan.room.create');
+    Route::post('/loan-room/store', [LoanRequestController::class, 'storeRoom'])->name('loan.room.store');
     Route::get('/users', [UserController::class, 'show'])->name('users.show')->middleware('permission:user.view');
     Route::get('/users/add', [UserController::class, 'create'])->name('users.create')->middleware('permission:user.create');
     Route::post('/store_user_superadmin', [UserController::class, 'store'])->name('users.store')->middleware('permission:user.create');
