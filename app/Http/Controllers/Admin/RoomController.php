@@ -1,17 +1,47 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Http\Request;
 
-class RoomController extends Controller
-{
+    class RoomController extends Controller
+    {
     // List semua ruangan
     public function index()
     {
         $rooms = \App\Models\room::all();
         return view('admin.rooms.index', compact('rooms'));
+    }
+
+    // Edit kategori ruangan
+    public function editCategory($id)
+    {
+        $category = \App\Models\room_category::findOrFail($id);
+        $categories = \App\Models\room_category::orderBy('name')->get();
+        return view('admin.rooms.categories', compact('categories', 'category'));
+    }
+
+    // Update kategori ruangan
+    public function updateCategory(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+        $category = \App\Models\room_category::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        return redirect()->route('rooms.categories')->with('success', 'Kategori berhasil diupdate.');
+    }
+
+    // Hapus kategori ruangan
+    public function deleteCategory($id)
+    {
+        $category = \App\Models\room_category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('rooms.categories')->with('success', 'Kategori berhasil dihapus.');
     }
 
     // Form tambah ruangan
@@ -34,10 +64,22 @@ class RoomController extends Controller
         return redirect()->route('rooms.index')->with('success', 'Ruangan berhasil ditambahkan.');
     }
 
-    // List kategori ruangan (dummy, bisa dikembangkan)
-    public function categories()
+    // List & input kategori ruangan
+    public function categories(Request $request)
     {
-        // $categories = ...
-        return view('admin.rooms.categories');
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+            ]);
+            \App\Models\room_category::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'is_active' => true,
+            ]);
+            return redirect()->route('rooms.categories')->with('success', 'Kategori berhasil ditambahkan.');
+        }
+        $categories = \App\Models\room_category::orderBy('name')->get();
+        return view('admin.rooms.categories', compact('categories'));
     }
 }

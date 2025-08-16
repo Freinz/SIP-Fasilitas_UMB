@@ -50,7 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
     Route::get('/rooms/add', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/rooms/store', [RoomController::class, 'store'])->name('rooms.store');
-    Route::get('/room-categories', [RoomController::class, 'categories'])->name('rooms.categories');
+    Route::match(['get', 'post'], '/room-categories', [RoomController::class, 'categories'])->name('rooms.categories');
+    Route::get('/room-categories/{id}/edit', [RoomController::class, 'editCategory'])->name('rooms.categories.edit');
+    Route::post('/room-categories/{id}/update', [RoomController::class, 'updateCategory'])->name('rooms.categories.update');
+    Route::delete('/room-categories/{id}', [RoomController::class, 'deleteCategory'])->name('rooms.categories.delete');
 
     // Loan Equipment (Peminjaman Alat)
     Route::get('/loan-equipment/create', [LoanRequestController::class, 'createEquipment'])->name('loan.equipment.create');
