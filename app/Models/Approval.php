@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class approvals extends Model
+class Approval extends Model
 {
-    protected $table = 'approvals';
+    use HasFactory;
 
     protected $fillable = [
         'loan_request_id',
@@ -19,7 +20,7 @@ class approvals extends Model
 
     public function loanRequest()
     {
-        return $this->belongsTo(loan_request::class, 'loan_request_id');
+        return $this->belongsTo(loan_request::class);
     }
 
     public function approver()

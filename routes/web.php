@@ -39,8 +39,12 @@ Route::get('/register', function() {
 // Define a group of routes with 'auth' middleware applied
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Loan\ApprovalController;
 
 Route::middleware(['auth'])->group(function () {
+    // Riwayat peminjaman ruangan user
+    Route::get('/loan-room/history', [LoanRequestController::class, 'historyRoom'])->name('loan.room.history');
+    Route::get('/loan-room/history/{id}', [LoanRequestController::class, 'historyRoomShow'])->name('loan.room.history.show');
     // Dashboard route menggunakan controller
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -62,6 +66,11 @@ Route::middleware(['auth'])->group(function () {
     // Loan Room (Peminjaman Ruangan)
     Route::get('/loan-room/create', [LoanRequestController::class, 'createRoom'])->name('loan.room.create');
     Route::post('/loan-room/store', [LoanRequestController::class, 'storeRoom'])->name('loan.room.store');
+
+    // Approval Multi-level (Admin)
+    Route::get('/loan-approval', [ApprovalController::class, 'index'])->name('loan.approval.index');
+    Route::get('/loan-approval/{id}', [ApprovalController::class, 'show'])->name('loan.approval.show');
+    Route::post('/loan-approval/{id}/action', [ApprovalController::class, 'action'])->name('loan.approval.action');
     Route::get('/users', [UserController::class, 'show'])->name('users.show')->middleware('permission:user.view');
     Route::get('/users/add', [UserController::class, 'create'])->name('users.create')->middleware('permission:user.create');
     Route::post('/store_user_superadmin', [UserController::class, 'store'])->name('users.store')->middleware('permission:user.create');
